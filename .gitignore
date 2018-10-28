@@ -1,0 +1,10 @@
+lib/
+node_modules/
+coverage/
+build/
+dist/
+projects/**
+server/config.js
+server/server.js
+server/dbexample.js
+compilation-stats.json
