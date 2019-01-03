@@ -44,6 +44,9 @@ const styles = {
   loading: {
     position: 'relative',
   },
+  colorPrimary: {
+    color: 'greenyellow',
+  },
 };
 
 class ThumbnailImage extends PureComponent {
@@ -53,7 +56,7 @@ class ThumbnailImage extends PureComponent {
     loading: true,
     error: false,
     src: '',
-  }
+  };
 
   componentDidMount() {
     const { src } = this.props;
@@ -67,27 +70,27 @@ class ThumbnailImage extends PureComponent {
 
   onLoad = () => {
     this.setState({ loading: false, error: false });
-  }
+  };
 
   onError = () => {
     this.setState({ loading: false, error: true });
-  }
+  };
 
   render() {
-    const {
-      classes, style, className, alt, ...props
-    } = this.props;
+    const { classes, style, className, alt, ...props } = this.props;
     const { error, loading, src } = this.state;
-    const imgStyle = src && !error
-      ? {
-        display: 'block',
-      }
-      : {};
-    const wrapperStyle = src && !error
-      ? {
-        minHeight: 0,
-      }
-      : {};
+    const imgStyle =
+      src && !error
+        ? {
+            display: 'block',
+          }
+        : {};
+    const wrapperStyle =
+      src && !error
+        ? {
+            minHeight: 0,
+          }
+        : {};
     return (
       <div className={classes.wrapper} style={wrapperStyle}>
         <img
@@ -100,13 +103,17 @@ class ThumbnailImage extends PureComponent {
           onLoad={this.onLoad}
           {...props}
         />
-        {loading
-          && (
-            <div className={classes.progressWrapper}>
-              <CircularProgress size={30} className={classes.loading} />
-            </div>
-          )
-        }
+        {loading && (
+          <div className={classes.progressWrapper}>
+            <CircularProgress
+              size={30}
+              className={classes.loading}
+              classes={{
+                colorPrimary: classes.colorPrimary,
+              }}
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -126,5 +133,5 @@ ThumbnailImage.defaultProps = {
   className: '',
   classes: {},
   style: {},
-  alt: 'Project\'s screenshot',
+  alt: "Project's screenshot",
 };

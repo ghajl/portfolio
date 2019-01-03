@@ -9,7 +9,7 @@ import { isProduction } from '../config/app';
 const app = express();
 
 const barcoordinatorConfig = {
-  root: `${process.cwd()}/projects/barcoordinator`,
+  root: `${process.cwd()}/projects/barcoordinator`
 };
 const appBarcoordinator = createServer().withConfig(barcoordinatorConfig);
 
@@ -27,11 +27,12 @@ app.use('/dist', express.static(`${process.cwd()}/dist`));
 initRoutes(app);
 
 app.get('*', async (req, res) => {
+  console.log('ser');
   const { html, context } = await createApp(req.url);
   const { url = null } = context;
   if (url) {
     res.writeHead(302, {
-      Location: url,
+      Location: url
     });
     res.end();
   } else {

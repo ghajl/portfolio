@@ -7,9 +7,11 @@ const styles = {
   '@global': {
     html: {
       minHeight: '100%',
+      height: '100%',
       fontSize: 16,
     },
     body: {
+      height: '100%',
       minHeight: '100%',
       margin: 0,
       background: 'white',
@@ -45,7 +47,8 @@ class Page extends PureComponent {
     },
     {
       name: 'viewport',
-      content: 'initial-scale=1, minimum-scale=1, width=device-width, height=device-height',
+      content:
+        'initial-scale=1, minimum-scale=1, width=device-width, height=device-height',
     },
   ];
 
@@ -64,9 +67,7 @@ class Page extends PureComponent {
   title = 'Michael Umansky | Portfolio';
 
   render() {
-    const {
-      classes, style, className, children, ...props
-    } = this.props;
+    const { classes, style, className, children, ...props } = this.props;
     return (
       <div
         className={`${classes.root} ${className}`}

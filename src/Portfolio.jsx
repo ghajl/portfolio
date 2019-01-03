@@ -5,11 +5,14 @@ import NotFound from './NotFound';
 
 const Portfolio = () => (
   <Switch>
-
     <Redirect exact from="/portfolio" to="/portfolio/freecodecamp" />
-    <Redirect exact from="/portfolio/freecodecamp" to="/portfolio/freecodecamp/full-stack" />
+    <Redirect
+      exact
+      from="/portfolio/freecodecamp"
+      to="/portfolio/freecodecamp/show-all"
+    />
     <Route
-      path="/portfolio/freecodecamp/:keyword(full-stack|front-end)"
+      path="/portfolio/freecodecamp/:keyword(show-all|full-stack|front-end|mongodb|nodejs|react|redux|graphql|gatsby|netlify-cms)"
       component={PortfolioContent}
     />
     <Route component={NotFound} />

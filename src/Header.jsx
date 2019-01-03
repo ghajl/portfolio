@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles } from '@material-ui/core/styles';
 import withLoading from './withLoading';
+import FilterButton from './FilterButton';
 
 const styles = {
   wrapper: {
@@ -20,15 +21,18 @@ const styles = {
   title: {
     fontFamily: 'sans-serif',
     color: 'white',
-    fontSize: '1.6rem',
+    fontSize: '1.3rem',
     textShadow: '0 0 1px #fff',
+    '@media (min-width: 360px)': {
+      fontSize: '1.6rem',
+    },
   },
   intro: {
     fontFamily: 'Open Sans, sans-serif',
     color: 'lightgray',
   },
   actions: {
-    marginLeft: '-0.8rem',
+    margin: '5px 0 5px -5px',
   },
   menuWrapper: {
     zIndex: 1000,
@@ -89,6 +93,12 @@ const styles = {
   progressRoot: {
     height: 2,
   },
+  colorPrimary: {
+    backgroundColor: 'greenyellow',
+  },
+  barColorPrimary: {
+    backgroundColor: 'greenyellow',
+  },
   progressStoppedAnimation: {
     animationIterationCount: 0,
   },
@@ -120,7 +130,9 @@ class Header extends PureComponent {
           this.timer = setInterval(this.progress, 50);
         });
       } else if (!isLoading && prevState.playing) {
-        this.setState({ playing: false, completed: 0, buffer: 0 }, () => clearInterval(this.timer));
+        this.setState({ playing: false, completed: 0, buffer: 0 }, () =>
+          clearInterval(this.timer)
+        );
       }
     }
   }
@@ -136,78 +148,84 @@ class Header extends PureComponent {
     } else {
       const diff = Math.random() * 10;
       const diff2 = Math.random() * 10;
-      this.setState({ completed: completed + diff, buffer: completed + diff + diff2 });
+      this.setState({
+        completed: completed + diff,
+        buffer: completed + diff + diff2,
+      });
     }
   };
 
   render() {
-    const {
-      classes, style, className, headerRef, fixed,
-    } = this.props;
+    const { classes, style, className, headerRef, fixed } = this.props;
     const { playing, completed, buffer } = this.state;
     const headerStyle = fixed
       ? {
-        background: '#323438',
-        boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-      }
+          background: '#323438',
+          boxShadow:
+            '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
+        }
       : {};
     const fixedMenuStyle = fixed
       ? {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        background: '#323438',
-        boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-      }
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          background: '#323438',
+          boxShadow:
+            '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
+        }
       : {};
-    const fixedMenuAnchorStyle = fixed && this.menuRef
-      ? {
-        height: this.menuRef.current.getBoundingClientRect().height,
-      }
-      : {
-        height: '0px',
-      };
+    const fixedMenuAnchorStyle =
+      fixed && this.menuRef
+        ? {
+            height: this.menuRef.current.getBoundingClientRect().height,
+          }
+        : {
+            height: '0px',
+          };
     let progressStyle = fixed
       ? {
-        background: '#323438',
-      }
+          background: '#323438',
+        }
       : {};
     progressStyle = playing
       ? {
-        ...progressStyle, ...{ animationIterationCount: 'infinite' },
-      }
+          ...progressStyle,
+          ...{ animationIterationCount: 'infinite' },
+        }
       : {
-        ...progressStyle, ...{ animationIterationCount: 0 },
-      };
+          ...progressStyle,
+          ...{ animationIterationCount: 0 },
+        };
     const linearProgressClasses = playing
       ? {
-        dashedColorPrimary: classes.progressDashedColor,
-        root: classes.progressRoot,
-      }
+          dashedColorPrimary: classes.progressDashedColor,
+          root: classes.progressRoot,
+          colorPrimary: classes.colorPrimary,
+          barColorPrimary: classes.barColorPrimary,
+        }
       : {
-        dashed: classes.progressStoppedAnimation,
-        dashedColorPrimary: `${classes.progressDashedColor} ${classes.progressStoppedDashedColor}`,
-        root: classes.progressRoot,
-      };
+          dashed: classes.progressStoppedAnimation,
+          dashedColorPrimary: `${classes.progressDashedColor} ${
+            classes.progressStoppedDashedColor
+          }`,
+          root: classes.progressRoot,
+          barColorPrimary: classes.barColorPrimary,
+        };
     return (
       <div
         className={`${classes.wrapper} ${className}`}
         style={{ ...style, ...headerStyle }}
       >
-        <header
-          className={`${classes.header} page-wrapper`}
-          ref={headerRef}
-        >
+        <header className={`${classes.header} page-wrapper`} ref={headerRef}>
           <div className={classes.title}>
-            <h1>
-              web software development projects
-            </h1>
+            <h1>web software development projects</h1>
           </div>
           <div className={classes.intro}>
             <h3>
-              Responsive HTML/CSS and modern web development
-              technologies - React, Redux, Gatsby, etc.
+              Responsive HTML/CSS and modern web development technologies -
+              React, Redux, Gatsby, etc.
             </h3>
           </div>
         </header>
@@ -217,24 +235,50 @@ class Header extends PureComponent {
           style={fixedMenuStyle}
           className={classes.menuWrapper}
         >
-          <div
-            className={`${classes.menu} page-wrapper`}
-          >
+          <div className={`${classes.menu} page-wrapper`}>
             <div className={classes.actions}>
-              <NavLink
-                className={classes.link}
-                activeClassName={classes.linkActive}
+              <FilterButton
+                to={{ pathname: '/portfolio/freecodecamp/show-all' }}
+              >
+                Show All
+              </FilterButton>
+              <FilterButton
                 to={{ pathname: '/portfolio/freecodecamp/full-stack' }}
               >
                 Full Stack
-              </NavLink>
-              <NavLink
-                className={classes.link}
-                activeClassName={classes.linkActive}
+              </FilterButton>
+              <FilterButton
                 to={{ pathname: '/portfolio/freecodecamp/front-end' }}
               >
                 Front-End
-              </NavLink>
+              </FilterButton>
+              <FilterButton to={{ pathname: '/portfolio/freecodecamp/nodejs' }}>
+                NodeJS
+              </FilterButton>
+              <FilterButton to={{ pathname: '/portfolio/freecodecamp/redux' }}>
+                Redux
+              </FilterButton>
+              <FilterButton to={{ pathname: '/portfolio/freecodecamp/gatsby' }}>
+                Gatsby
+              </FilterButton>
+              <FilterButton
+                to={{ pathname: '/portfolio/freecodecamp/graphql' }}
+              >
+                GraphQL
+              </FilterButton>
+              <FilterButton
+                to={{ pathname: '/portfolio/freecodecamp/mongodb' }}
+              >
+                MongoDb
+              </FilterButton>
+              <FilterButton to={{ pathname: '/portfolio/freecodecamp/react' }}>
+                React
+              </FilterButton>
+              <FilterButton
+                to={{ pathname: '/portfolio/freecodecamp/netlify-cms' }}
+              >
+                Netlify CMS
+              </FilterButton>
             </div>
           </div>
         </div>
