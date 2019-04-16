@@ -7,18 +7,18 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 
 const browserConfig = {
-  entry: { main: ['babel-polyfill', './src/index.jsx'] },
+  entry: { main: ['babel-polyfill', './client/index.jsx'] },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/',
+    publicPath: '/dist/'
   },
   plugins: [
     new webpack.DefinePlugin({
-      __isBrowser__: 'true',
+      __isBrowser__: 'true'
     }),
     new CleanWebpackPlugin('dist', {}),
-    new Visualizer(),
+    new Visualizer()
   ],
   module: {
     rules: [
@@ -26,31 +26,31 @@ const browserConfig = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-        },
+          loader: 'babel-loader'
+        }
       },
       {
         test: /\.(png|jpg|gif)$/,
         use: [
           {
-            loader: 'url-loader',
-          },
-        ],
-      },
-    ],
+            loader: 'url-loader'
+          }
+        ]
+      }
+    ]
   },
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
-        parallel: true,
-      }),
-    ],
+        parallel: true
+      })
+    ]
   },
   // devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.jsx'],
-  },
+    extensions: ['.js', '.jsx']
+  }
 };
 
 const serverConfig = {
@@ -60,26 +60,26 @@ const serverConfig = {
   output: {
     path: path.resolve(process.cwd(), 'server'),
     filename: 'server.js',
-    publicPath: '/server/',
+    publicPath: '/server/'
   },
   module: {
     rules: [
       {
         test: /\.(jsx?)$/,
         use: {
-          loader: 'babel-loader',
-        },
-      },
-    ],
+          loader: 'babel-loader'
+        }
+      }
+    ]
   },
   plugins: [
     new NodemonPlugin(),
     new webpack.DefinePlugin({
-      __isBrowser__: 'false',
-    }),
+      __isBrowser__: 'false'
+    })
   ],
   resolve: {
-    extensions: ['.js', '.jsx'],
-  },
+    extensions: ['.js', '.jsx']
+  }
 };
 module.exports = [browserConfig, serverConfig];

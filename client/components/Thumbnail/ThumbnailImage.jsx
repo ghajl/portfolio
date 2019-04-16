@@ -9,44 +9,43 @@ const styles = {
     background: '#333',
     minHeight: 'calc((100vw - 2.4rem) / 1.57)',
     '@media (min-width: 500px)': {
-      minHeight: 'calc((500px - 2.4rem) / 1.57)',
+      minHeight: 'calc((500px - 2.4rem) / 1.57)'
     },
     '@media (min-width: 768px)': {
-      minHeight: 'calc((350px - 2.4rem) / 1.57)',
+      minHeight: 'calc((350px - 2.4rem) / 1.57)'
     },
     '@media (min-width: 1024px)': {
-      minHeight: 'calc((450px - 2.4rem) / 1.57)',
+      minHeight: 'calc((450px - 2.4rem) / 1.57)'
     },
     '@media (min-width: 1280px)': {
-      minHeight: 'calc((550px - 2.4rem) / 1.57)',
+      minHeight: 'calc((550px - 2.4rem) / 1.57)'
     },
     '@media (min-width: 1440px)': {
-      minHeight: 'calc((650px - 2.4rem) / 1.57)',
+      minHeight: 'calc((650px - 2.4rem) / 1.57)'
     },
     '@media (min-width: 1600px)': {
-      minHeight: 'calc((750px - 2.4rem) / 1.57)',
+      minHeight: 'calc((750px - 2.4rem) / 1.57)'
     },
-    zIndex: -3,
+    zIndex: -3
   },
   image: {
     position: 'relative',
     objectFit: 'cover',
     display: 'none',
-    maxWidth: '100%',
-    // zIndex: -2,
+    maxWidth: '100%'
   },
   progressWrapper: {
     position: 'absolute',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%, -50%)',
+    transform: 'translate(-50%, -50%)'
   },
   loading: {
-    position: 'relative',
+    position: 'relative'
   },
   colorPrimary: {
-    color: 'greenyellow',
-  },
+    color: 'greenyellow'
+  }
 };
 
 class ThumbnailImage extends PureComponent {
@@ -55,7 +54,7 @@ class ThumbnailImage extends PureComponent {
   state = {
     loading: true,
     error: false,
-    src: '',
+    src: ''
   };
 
   componentDidMount() {
@@ -79,18 +78,17 @@ class ThumbnailImage extends PureComponent {
   render() {
     const { classes, style, className, alt, ...props } = this.props;
     const { error, loading, src } = this.state;
-    const imgStyle =
-      src && !error
-        ? {
-            display: 'block',
-          }
-        : {};
-    const wrapperStyle =
-      src && !error
-        ? {
-            minHeight: 0,
-          }
-        : {};
+    const hasImage = src && !error;
+    const imgStyle = hasImage
+      ? {
+          display: 'block'
+        }
+      : {};
+    const wrapperStyle = hasImage
+      ? {
+          minHeight: 0
+        }
+      : {};
     return (
       <div className={classes.wrapper} style={wrapperStyle}>
         <img
@@ -103,13 +101,13 @@ class ThumbnailImage extends PureComponent {
           onLoad={this.onLoad}
           {...props}
         />
-        {loading && (
+        {!!loading && (
           <div className={classes.progressWrapper}>
             <CircularProgress
               size={30}
               className={classes.loading}
               classes={{
-                colorPrimary: classes.colorPrimary,
+                colorPrimary: classes.colorPrimary
               }}
             />
           </div>
@@ -126,12 +124,12 @@ ThumbnailImage.propTypes = {
   alt: PropTypes.string,
   className: PropTypes.string,
   classes: PropTypes.shape({}),
-  style: PropTypes.shape({}),
+  style: PropTypes.shape({})
 };
 
 ThumbnailImage.defaultProps = {
   className: '',
   classes: {},
   style: {},
-  alt: "Project's screenshot",
+  alt: "Project's screenshot"
 };

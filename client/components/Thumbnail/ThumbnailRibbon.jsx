@@ -22,8 +22,7 @@ const styles = {
     color: '#fff',
     textDecoration: 'none',
     perspective: 100,
-    fontSmoothing: 'antialiased',
-    // textShadow: '0 0 3px #555',
+    fontSmoothing: 'antialiased'
   },
   ribbonLink: {
     top: '2.2rem',
@@ -33,33 +32,20 @@ const styles = {
     transform: 'translate(50%, -50%) rotate(45deg)',
     display: 'block',
     position: 'absolute',
-    opacity: 0,
-  },
+    opacity: 0
+  }
 };
 
-class ThumbnailRibbon extends PureComponent {
-  render() {
-    const {
-      classes, style, className, href, target, rel, children, ...props
-    } = this.props;
-    return (
-      <React.Fragment>
-        <div className={`${classes.ribbon} ${className}`} style={{ ...style }}>
-          {children}
-        </div>
-        <a
-          className={classes.ribbonLink}
-          href={href}
-          target={target}
-          rel={rel}
-          {...props}
-        >
-          Link to gitHub page
-        </a>
-      </React.Fragment>
-    );
-  }
-}
+const ThumbnailRibbon = ({ classes, style, className, href, target, rel, children, ...props }) => (
+  <React.Fragment>
+    <div className={`${classes.ribbon} ${className}`} style={{ ...style }}>
+      {children}
+    </div>
+    <a className={classes.ribbonLink} href={href} target={target} rel={rel} {...props}>
+      Link to gitHub page
+    </a>
+  </React.Fragment>
+);
 
 export default withStyles(styles)(ThumbnailRibbon);
 
@@ -70,7 +56,7 @@ ThumbnailRibbon.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   classes: PropTypes.shape({}),
-  style: PropTypes.shape({}),
+  style: PropTypes.shape({})
 };
 
 ThumbnailRibbon.defaultProps = {
@@ -78,5 +64,5 @@ ThumbnailRibbon.defaultProps = {
   target: '_blank',
   rel: 'noopener noreferrer',
   classes: {},
-  style: {},
+  style: {}
 };

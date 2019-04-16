@@ -18,13 +18,12 @@ export default async (location, db) => {
               const keyword = path[2];
               try {
                 if (isClient) {
-                  console.log('1');
                   const response = await axios.get('/projectsData', {
-                    params: { keyword },
+                    params: { keyword }
                   });
+
                   data.projects = response.data.projects;
                 } else {
-                  console.log('2');
                   data.projects = await getProjectsData(db, keyword);
                 }
               } catch (e) {

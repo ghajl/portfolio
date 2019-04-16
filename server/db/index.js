@@ -16,7 +16,6 @@ export const connectDb = config => {
 export const getProjectsData = (ddb, keyword) =>
   new Promise((resolve, reject) => {
     const k = keyword === 'show-all' ? '0' : keyword;
-    console.log(k);
     let params = {
       TableName: 'Projects',
       IndexName: 'KeywordIndex',

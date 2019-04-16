@@ -2,22 +2,17 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Page from './Page';
-import Footer from './Footer';
+import Footer from '../components/Footer';
 
 const styles = {
-  '@global': {
-    body: {
-      background: '#55585E',
-    },
-  },
   content: {
     flex: '1 0 auto',
     width: '100%',
     color: 'white',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 };
 
 const NotFound = ({ classes }) => (
@@ -32,9 +27,9 @@ const NotFound = ({ classes }) => (
 export default withStyles(styles)(NotFound);
 
 NotFound.propTypes = {
-  classes: PropTypes.shape({}),
+  classes: PropTypes.shape({})
 };
 
 NotFound.defaultProps = {
-  classes: {},
+  classes: {}
 };

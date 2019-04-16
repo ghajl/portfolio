@@ -25,9 +25,7 @@ app.use('/public', express.static(`${process.cwd()}/public`));
 app.use('/dist', express.static(`${process.cwd()}/dist`));
 
 initRoutes(app);
-
 app.get('*', async (req, res) => {
-  console.log('ser');
   const { html, context } = await createApp(req.url);
   const { url = null } = context;
   if (url) {
