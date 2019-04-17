@@ -5,24 +5,22 @@ import FilterButton from '../FilterButton';
 import styles from './MenuStyles';
 
 const Menu = ({ menuRef, classes, style }) => (
-  <Fragment>
-    <div ref={menuRef} style={{ ...style }} className={classes.menuWrapper}>
-      <div className={`${classes.menu} page-center`}>
-        <div className={classes.actions}>
-          <FilterButton value="show-all">Show All</FilterButton>
-          <FilterButton value="full-stack">Full Stack</FilterButton>
-          <FilterButton value="front-end">Front-End</FilterButton>
-          <FilterButton value="nodejs">NodeJS</FilterButton>
-          <FilterButton value="redux">Redux</FilterButton>
-          <FilterButton value="gatsby">Gatsby</FilterButton>
-          <FilterButton value="graphql">GraphQL</FilterButton>
-          <FilterButton value="mongodb">MongoDb</FilterButton>
-          <FilterButton value="react">React</FilterButton>
-          <FilterButton value="netlify-cms">Netlify CMS</FilterButton>
-        </div>
+  <nav ref={menuRef} style={{ ...style }} className={classes.menu}>
+    <div className={`${classes.links} page-center`}>
+      <div className={classes.wrapper}>
+        <FilterButton value="show-all">Show All</FilterButton>
+        <FilterButton value="full-stack">Full Stack</FilterButton>
+        <FilterButton value="front-end">Front-End</FilterButton>
+        <FilterButton value="nodejs">NodeJS</FilterButton>
+        <FilterButton value="redux">Redux</FilterButton>
+        <FilterButton value="gatsby">Gatsby</FilterButton>
+        <FilterButton value="graphql">GraphQL</FilterButton>
+        <FilterButton value="mongodb">MongoDb</FilterButton>
+        <FilterButton value="react">React</FilterButton>
+        <FilterButton value="netlify-cms">Netlify CMS</FilterButton>
       </div>
     </div>
-  </Fragment>
+  </nav>
 );
 
 export default withStyles(styles)(Menu);

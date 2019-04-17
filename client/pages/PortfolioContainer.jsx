@@ -39,9 +39,9 @@ class PortfolioContainer extends PureComponent {
     return (
       <Page>
         <Header headerRef={this.headerRef} />
-        <div className={classes.content}>
+        <main className={classes.content}>
           <Portfolio />
-        </div>
+        </main>
         <Footer />
       </Page>
     );

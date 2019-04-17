@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './FooterStyles';
 
 const Footer = ({ classes }) => (
-  <div className={classes.root}>
+  <footer className={classes.root}>
     <div className={classes.iconsContainer}>
       <div className={classes.iconContainer}>
         <a
@@ -31,7 +31,7 @@ const Footer = ({ classes }) => (
         </a>
       </div>
     </div>
-  </div>
+  </footer>
 );
 
 export default withStyles(styles)(Footer);

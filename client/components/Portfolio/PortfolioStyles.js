@@ -1,5 +1,5 @@
 export default {
-  wrapper: {
+  projects: {
     flex: '1 1 auto'
   }
 };

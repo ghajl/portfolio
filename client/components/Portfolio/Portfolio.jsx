@@ -6,7 +6,7 @@ import withData from '../../helpers/withData';
 import styles from './PortfolioStyles';
 
 const Portfolio = ({ classes, data: { projects } }) => (
-  <div className={classes.wrapper}>
+  <div className={classes.projects}>
     <Projects className="page-center" projects={projects} />
   </div>
 );
